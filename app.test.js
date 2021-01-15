@@ -86,6 +86,18 @@ describe("Test the NodeJS backend application", () => {
         }).set('Content-Type', 'application/json').set('Accept', 'application/json');
         expect(response.status).toBe(200);
     });
+    test("test route for deleting product", async () => {
+        const product = new Product({
+            title: 'my product',
+            description: 'my product',
+            price: 100.00
+        });
+        await product.save();
+        const response = await request(app).post('/products/delete').send({
+            id: product.id
+        }).set('Content-Type', 'application/json').set('Accept', 'application/json');
+        expect(response.status).toBe(200);
+    });
     afterEach(done => {
         mongoose.disconnect(done);
     });

@@ -192,4 +192,32 @@ router.post('/update', (req, res, next) => {
     });
 });
 
+
+
+/**
+ * @swagger
+ * 
+ * /products/delete:
+ *   post:
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         in: query
+ *         type: string
+ *         required: true
+ * 
+ */
+router.post('/delete', (req, res, next) => {
+    Product.findByIdAndDelete(req.body.id, (err) => {
+        if (err !== null) {
+            res.status(500).json();
+        } else {
+            res.status(200).json();
+        }
+    });
+});
+
 module.exports = router;
