@@ -148,4 +148,48 @@ router.post('/filter', (req, res, next) => {
     });
 });
 
+
+
+/**
+ * @swagger
+ * 
+ * /products/update:
+ *   post:
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: title
+ *         in: query
+ *         required: false
+ *         type: string
+ *       - name: description
+ *         in: query
+ *         required: false
+ *         type: string
+ *       - name: price
+ *         in: query
+ *         type: float
+ *         required: false
+ *       - name: id
+ *         in: query
+ *         type: string
+ *         required: true
+ * 
+ */
+router.post('/update', (req, res, next) => {
+    Product.findByIdAndUpdate(req.body.id, {
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price
+    }, (err) => {
+        if (err !== null) {
+            res.status(500).json();
+        } else {
+            res.status(200).json();
+        }
+    });
+});
+
 module.exports = router;
