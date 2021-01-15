@@ -38,3 +38,26 @@ Your challenge is to develop an API, using Node.JS, for a product catalog manage
 - Code organization, module separation, readability and comments.
 - Commit history.
 - The use of MongoDB is a differentiator
+
+
+<strong>How to run</strong>
+
+- Install NodeJS in your system.
+
+- Clone this repository
+
+    git clone https://github.com/crislmfroes/test-backend-nodejs.git
+
+- Install dependencies
+
+    npm install
+
+- Run tests
+
+    npm run test
+
+- Run app server
+
+    npm run start
+
+- API documentation is available at [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
