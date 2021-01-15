@@ -62,7 +62,7 @@ router.post('/create', (req, res, next) => {
  */
 router.post('/update', (req, res, next) => {
     ProductCategory.findByIdAndUpdate(req.body.id, {
-        name: req.body.name,
+        title: req.body.name,
         description: req.body.description
     }, (err, category) => {
         if (err !== null) {

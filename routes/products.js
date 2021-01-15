@@ -99,11 +99,51 @@ router.post('/associate', (req, res, next) => {
  * 
  */
 router.get('/list', (req, res, next) => {
-    ProductCategory.find((err, products) => {
+    Product.find((err, products) => {
         if (err !== null) {
             res.status(500).json();
         } else {
             res.status(200).json(products);
+        }
+    });
+});
+
+
+/**
+ * @swagger
+ * 
+ * /products/filter:
+ *   post:
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: title
+ *         in: query
+ *         required: false
+ *         type: string
+ *       - name: category_id
+ *         in: query
+ *         required: false
+ *         type: string
+ * 
+ */
+router.post('/filter', (req, res, next) => {
+    ProductCategory.findById(req.body.category_id, (err, category) => {
+        if (err !== null) {
+            res.status(500).json();
+        } else {
+            Product.find({
+                title: new RegExp(req.body.title, 'i'),
+                category: category
+            }, (err, products) => {
+                if (err !== null) {
+                    res.status(500).json();
+                } else {
+                    res.status(200).json(products);
+                }
+            });
         }
     });
 });

@@ -37,19 +37,38 @@ describe("Test the NodeJS backend application", () => {
     });
     test("test route for updating category data", async () => {
         const category = new ProductCategory({
-            name: 'my category',
+            title: 'my category',
             description: 'my category'
         });
         await category.save();
         const response = await request(app).post('/categories/update').send({
             id: category.id,
-            name: 'my category edited',
+            title: 'my category edited',
             description: 'my category edited'
         }).set('Content-Type', 'application/json').set('Accept', 'application/json');
         expect(response.status).toBe(200);
     });
     test("test route for listing all products", async () => {
         const response = await request(app).get('/products/list').set('Content-Type', 'application/json').set('Accept', 'application/json');
+        expect(response.status).toBe(200);
+    });
+    test("test route for filtering products by category and title", async () => {
+        const category = new ProductCategory({
+            title: 'my category',
+            description: 'my category'
+        });
+        await category.save();
+        const product = new Product({
+            title: 'my product',
+            description: 'my product',
+            price: 100.00,
+            category: category
+        });
+        await product.save();
+        const response = await request(app).post('/products/filter').send({
+            category_id: category.id,
+            title: 'my'
+        }).set('Content-Type', 'application/json').set('Accept', 'application/json');
         expect(response.status).toBe(200);
     });
     afterEach(done => {
