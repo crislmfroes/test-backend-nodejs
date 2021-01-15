@@ -16,7 +16,7 @@ const swaggerOptions = {
       version: '1.0.0',
     },
   },
-  apis: ['./routes/products.js'],
+  apis: ['./routes/products.js', './routes/categories.js'],
 };
 
 const swaggerSpecification = swaggerJsdoc(swaggerOptions);
@@ -24,6 +24,7 @@ const swaggerSpecification = swaggerJsdoc(swaggerOptions);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
+const categoriesRouter = require('./routes/categories');
 
 const app = express();
 app.use(express.json());
@@ -46,6 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+app.use('/categories', categoriesRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecification));
 
 // catch 404 and forward to error handler
