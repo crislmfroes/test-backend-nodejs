@@ -48,6 +48,10 @@ describe("Test the NodeJS backend application", () => {
         }).set('Content-Type', 'application/json').set('Accept', 'application/json');
         expect(response.status).toBe(200);
     });
+    test("test route for listing all products", async () => {
+        const response = await request(app).get('/products/list').set('Content-Type', 'application/json').set('Accept', 'application/json');
+        expect(response.status).toBe(200);
+    });
     afterEach(done => {
         mongoose.disconnect(done);
     });

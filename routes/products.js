@@ -87,4 +87,25 @@ router.post('/associate', (req, res, next) => {
     });
 });
 
+
+/**
+ * @swagger
+ * 
+ * /products/list:
+ *   get:
+ *     produces:
+ *       - application/json
+ * 
+ * 
+ */
+router.get('/list', (req, res, next) => {
+    ProductCategory.find((err, products) => {
+        if (err !== null) {
+            res.status(500).json();
+        } else {
+            res.status(200).json(products);
+        }
+    });
+});
+
 module.exports = router;
