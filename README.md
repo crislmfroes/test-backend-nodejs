@@ -52,6 +52,8 @@ Your challenge is to develop an API, using Node.JS, for a product catalog manage
 
     npm install
 
+- Copy .env.example to .env and change the config to suit your needs.
+
 - Run tests
 
     npm run test

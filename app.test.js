@@ -7,7 +7,7 @@ const ProductCategory = require('./models/ProductCategory');
 describe("Test the NodeJS backend application", () => {
     beforeEach(() => {
         mongoose.Promise = Promise;
-        mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true, useUnifiedTopology: true });
+        mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`, { useNewUrlParser: true, useUnifiedTopology: true });
     });
     test("Test route for registering product", async () => {
         const response = await request(app).post('/products/register').send({
